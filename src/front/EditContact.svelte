@@ -5,5 +5,5 @@
 </script>
 <main>
     This is the view of Contact {params.contactName};
-    <Button outline color="secundary" on:click{pop}>Back</Button>
+    <Button outline color="secondary" on:click{pop}>Back</Button>
 </main>
