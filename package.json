@@ -12,8 +12,12 @@
   "author": "fravaralg",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "cool-ascii-faces": "^1.3.4",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "nedb": "^1.8.0",
+    "svelte-spa-router": "^3.2.0",
+    "sveltestrap": "^5.9.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
