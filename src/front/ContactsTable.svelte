@@ -67,7 +67,8 @@
 						outline 
 						color="primary"
 						on:click="{insertContact}">Insert
-						</Button></td>
+						</Button>
+					</td>
 				</tr>
 				{#each contacts as contact}
 				<tr>
