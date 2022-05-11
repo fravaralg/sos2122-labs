@@ -16,7 +16,7 @@
 
 	async function getContacts(){
 		console.log("Fetching contacts....");
-		const res = await fetch("/api/v1/contacts");
+		const res = await fetch("/remoteAPI");
 		contacts = await res.json();
 		console.log("Received contacts: "+contacts.length);
 	}
