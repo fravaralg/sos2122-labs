@@ -115,13 +115,6 @@ module.exports = function (app) {
         res.sendStatus(201);
     });
 
-    app.get("/data",(req,res)=>{
-        data = [];
-        for(i=0;i<8;i++){
-            data.push(Math.random()*1000);
-        }
-        res.send(JSON.stringify(data));
-    })
 
 
 
