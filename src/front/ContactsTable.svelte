@@ -16,7 +16,7 @@
 
 	async function getContacts(){
 		console.log("Fetching contacts....");
-		const res = await fetch("https://sos2122-fravaralg.herokuapp.com/api/v1/contacts");
+		const res = await fetch("/api/v1/contacts");
 		contacts = await res.json();
 		console.log("Received contacts: "+contacts.length);
 	}
@@ -64,6 +64,7 @@
 					<td><input bind:value="{newContact.email}"></td>
 					<td><input bind:value="{newContact.phone}"></td>
 					<td><Button 
+						id="addContact"
 						outline 
 						color="primary"
 						on:click="{insertContact}">Insert

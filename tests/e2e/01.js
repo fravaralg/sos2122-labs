@@ -1,0 +1,64 @@
+const puppeteer = require('puppeteer');
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  page.setDefaultTimeout(10000);
+  try{
+    await page.goto('http://localhost:8080');
+  }catch(e){
+      console.error(`SERVER NOT READY: ${e}`);
+      await browser.close();
+      process.exit(1);
+  }
+
+  try{
+    const [response] = await Promise.all([
+    page.waitForNavigation(),
+    page.click('#contactTableLink'),
+    ]);
+  }catch(e){
+    console.error(`CONTACT TABLE LINK ERROR: ${e}`);
+    await browser.close();
+    process.exit(1);
+  }
+
+  try{
+    var initialRowCount = (await page.$$('body > main > main > table > tbody> tr')).length;
+
+  }catch(e){
+    console.error(`INITIAL ROW COUNT ERROR: ${e}`);
+    await browser.close();
+    process.exit(1);
+  }
+
+  try{
+    (await page.$$('#name')).value = "XXXXX";
+    (await page.$$('#email')).value = "XXXXX";
+    (await page.$$('#phone')).value = "XXXXX";
+    await page.click('#addContact');
+    await page.waitForTimeout(2000);
+  }catch(e){
+    console.error(`INITIAL ROW COUNT ERROR: ${e}`);
+    await browser.close();
+    process.exit(1);
+  }
+
+  try{
+    var finalRowCount = (await page.$$('body > main > main > table > tbody > tr')).length;
+    
+  }catch(e){
+    console.error(`FINAL ROW COUNT ERROR: ${e}`);
+    await browser.close();
+    process.exit(1);
+  }
+
+  if(initialRowCount != finalRowCount-1){
+    console.error(`ERROR INSERTING CONTACT: initialRowCount : ${initialRowCount}, finalRowCount : ${finalRowCount} (expected : ${initialRowCount+1})`);
+    process.exit(1);
+  }
+
+  await page.screenshot({path: 'final.png' });
+
+  await browser.close();
+})();
